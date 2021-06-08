@@ -5,7 +5,7 @@
     using SagoTouch;
     using Touch = SagoTouch.Touch;
 
-    public class Pokable : MonoBehaviour, ISingleTouchObserver {
+    public class Draggable : MonoBehaviour, ISingleTouchObserver {
 
         #region Non-Serialized Fields
 
@@ -63,16 +63,20 @@
 
         public bool OnTouchBegan(Touch touch) {
             if (HitTest(touch)) {
-                Debug.Log("Poked");
 				Touches.Add(touch);
+				Debug.Log("Added");
                 return true;
             }
-			Debug.Log("Missed");
 			return false;
         }
 
         public void OnTouchMoved(Touch touch) {
-
+			Vector3 average = new Vector3();
+			foreach(Touch t in Touches) {
+				average += CameraUtils.TouchToWorldPoint(t, this.Transform, this.Camera);
+			}
+			average /= Touches.Count;
+			transform.position = new Vector2(average.x, average.y);
         }
 
         public void OnTouchEnded(Touch touch) {
