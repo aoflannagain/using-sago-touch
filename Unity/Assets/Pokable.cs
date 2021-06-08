@@ -17,6 +17,9 @@
         [System.NonSerialized]
         private Transform m_Transform;
 
+		[System.NonSerialized]
+		private Touch m_Touch;
+
         #endregion
 
         #region Properties
@@ -56,12 +59,11 @@
         public bool OnTouchBegan(Touch touch) {
             if (HitTest(touch)) {
                 Debug.Log("Poked");
+				m_Touch = touch;
                 return true;
             }
-            else {
-                Debug.Log("Missed");
-                return false;
-            }
+			Debug.Log("Missed");
+			return false;
         }
 
         public void OnTouchMoved(Touch touch) {
@@ -69,11 +71,11 @@
         }
 
         public void OnTouchEnded(Touch touch) {
-
+			m_Touch = null;
         }
 
         public void OnTouchCancelled(Touch touch) {
-
+			OnTouchEnded(touch);
         }
 
         private bool HitTest(Touch touch) {
@@ -83,6 +85,5 @@
         }
 
         #endregion
-        }
-
+	}
 }
