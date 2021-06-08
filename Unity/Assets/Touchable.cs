@@ -47,7 +47,7 @@
 			Debug.Log("Touch Up!", this);
 		}
 		private void TouchDown(TouchArea touchArea, Touch touch) {
-			Debug.Log("Touch Down!", this);
+			transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
 		}
 
 
