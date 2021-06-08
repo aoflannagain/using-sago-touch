@@ -1,3 +1,6 @@
 [submodule "Unity/Assets/Framework/SagoTouch"]
 	path = Unity/Assets/Framework/SagoTouch
 	url = git@github.com:SagoSago/sago-touch.git
+[submodule "Unity/Assets/Framework/SagoPlayset"]
+	path = Unity/Assets/Framework/SagoPlayset
+	url = git@github.com:SagoSago/sago-playset.git
