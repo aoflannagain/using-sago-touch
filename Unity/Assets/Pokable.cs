@@ -6,7 +6,26 @@
 
     public class Pokable : MonoBehaviour, ISingleTouchObserver {
 
+        #region MonoBehaviour
+
+        private void OnEnable() {
+            if (TouchDispatcher.Instance) {
+                TouchDispatcher.Instance.Add(this);
+            }
+        }
+
+        private void OnDisable() {
+            if (TouchDispatcher.Instance) {
+                TouchDispatcher.Instance.Remove(this);
+            }
+        }
+
+        #endregion
+
+        #region ISingleTouchObserver
+
         public bool OnTouchBegan(Touch touch) {
+            Debug.Log("Touched");
             return false;
         }
 
@@ -22,6 +41,7 @@
 
         }
 
+        #endregion
     }
 
 }
