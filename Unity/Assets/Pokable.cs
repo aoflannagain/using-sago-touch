@@ -1,5 +1,6 @@
 ﻿namespace UsingSagoTouch
 {
+	using System.Collections.Generic;
     using UnityEngine;
     using SagoTouch;
     using Touch = SagoTouch.Touch;
@@ -18,7 +19,7 @@
         private Transform m_Transform;
 
 		[System.NonSerialized]
-		private Touch m_Touch;
+		private List<Touch> m_Touches;
 
         #endregion
 
@@ -35,6 +36,10 @@
         private Transform Transform {
             get { return m_Transform = m_Transform ?? transform.parent.GetComponent<Transform>(); }
         }
+
+		private List<Touch> Touches {
+			get { return m_Touches = m_Touches ?? new List<Touch>(); }
+		}
 
         #endregion
 
@@ -59,7 +64,7 @@
         public bool OnTouchBegan(Touch touch) {
             if (HitTest(touch)) {
                 Debug.Log("Poked");
-				m_Touch = touch;
+				Touches.Add(touch);
                 return true;
             }
 			Debug.Log("Missed");
@@ -71,7 +76,7 @@
         }
 
         public void OnTouchEnded(Touch touch) {
-			m_Touch = null;
+			Touches.Remove(touch);
         }
 
         public void OnTouchCancelled(Touch touch) {
