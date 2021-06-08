@@ -21,7 +21,17 @@
 		[System.NonSerialized]
 		private List<Touch> m_Touches;
 
+		[System.NonSerialized]
+		private Vector2 m_Target;
+
         #endregion
+
+		#region Serialized Fields
+
+		[SerializeField]
+		private float m_Speed;
+
+		#endregion
 
         #region Properties
 
@@ -57,6 +67,13 @@
             }
         }
 
+		private void Update() {
+			if(Touches.Count > 0) {
+				Vector3 target3 = new Vector3(m_Target.x, m_Target.y);
+				transform.position += (target3 - transform.position) * m_Speed * Time.deltaTime;
+			}
+		}
+
         #endregion
 
         #region Touch
@@ -76,7 +93,8 @@
 				average += CameraUtils.TouchToWorldPoint(t, this.Transform, this.Camera);
 			}
 			average /= Touches.Count;
-			transform.position = new Vector2(average.x, average.y);
+			m_Target.x = average.x;
+			m_Target.y = average.y;
         }
 
         public void OnTouchEnded(Touch touch) {
