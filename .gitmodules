@@ -1,0 +1,3 @@
+[submodule "Unity/Assets/Framework/SagoTouch"]
+	path = Unity/Assets/Framework/SagoTouch
+	url = git@github.com:SagoSago/sago-touch.git
