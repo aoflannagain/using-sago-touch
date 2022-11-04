@@ -52,7 +52,7 @@
 		
 		private void Update() {
 			if(this.Grabbable.IsGrabbed) {
-				transform.position = this.Grabbable.TouchPosition;
+				transform.position = this.Grabbable.Position;
 			}
 		}
 
